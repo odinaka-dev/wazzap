@@ -1,0 +1,21 @@
+"use client";
+import Sidebar from "@/components/others/sidebar";
+import React from "react";
+import { BiLogOutCircle } from "react-icons/bi";
+
+export default function contact() {
+  return (
+    <div className="min-h-screen max-w-full grid grid-cols-[20%_75%] gap-4">
+      <div className="bg-[#634aff] text-white px-4 py-8 flex flex-col justify-between items-start">
+        <div>
+          <Sidebar />
+        </div>
+        <div className="flex gap-2 items-center">
+          <BiLogOutCircle />
+          <p>Logout</p>
+        </div>
+      </div>
+      <div>{/* the body of the contact us starts here */}</div>
+    </div>
+  );
+}
