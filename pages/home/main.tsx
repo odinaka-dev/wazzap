@@ -30,6 +30,10 @@ const FooterComponent = dynamic(() => import("./footer"), {
   loading: () => <section style={{ height: 500 }}>loading...</section>,
 });
 
+const PricingComponent = dynamic(() => import("./Pricing"), {
+  loading: () => <section style={{ height: 500 }}>loading...</section>,
+});
+
 export default function MainPages() {
   return (
     <div>
@@ -55,6 +59,7 @@ export default function MainPages() {
         <AboutUs />
       </div>
       <Services />
+      <PricingComponent />
       <FrequentlyAskedQuestions />
       <FooterComponent />
     </div>

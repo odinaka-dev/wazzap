@@ -16,6 +16,11 @@ export const DASHBOARDHELPERS = [
     url: "groups",
   },
   {
+    title: "All users",
+    Icon: LuContact,
+    url: "users",
+  },
+  {
     title: "contacts",
     Icon: LuContact,
     url: "contact",

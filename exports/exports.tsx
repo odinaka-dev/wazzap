@@ -4,7 +4,7 @@ export { default as Groups } from "@/pages/user/groups";
 export { default as ContactUs } from "@/pages/user/contact";
 export { default as Profile } from "@/pages/user/profile";
 export { default as Preference } from "@/pages/user/preference";
-export { default as Video } from "@/pages/user/video";
+export { default as Users } from "@/pages/user/all-users";
 // home page
 export { default as Main } from "@/pages/home/main";
 // authentication

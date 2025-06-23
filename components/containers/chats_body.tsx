@@ -33,7 +33,9 @@ export default function chats_body() {
       </div>
       {/* chats listed out in tabular format */}
       <div className="my-8">
-        <h1 className="text-2xl font-bold capitalize pb-4">Active chat</h1>
+        <h1 className="text-2xl font-medium pb-4 border-b">
+          Active Rooms and Groups
+        </h1>
         {/* the table data */}
         <div>{/* <TableDemo /> */}</div>
       </div>

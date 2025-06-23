@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function page() {
+export default function subFooter() {
   return <div></div>;
 }

@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 
 export default function services() {
   return (
-    <div className="mt-12 bg-[#3d2ea0] py-16">
-      <div className="max-w-[80%] mx-auto text-white text-left">
-        <h1 className="text-2xl capitalize font-semibold">Our Services</h1>
+    <div className="mt-12 bg-gray-800 py-16">
+      <div className="max-w-[90%] sm:max-w-[80%] mx-auto text-white text-left">
+        <h1 className="text-2xl sm:text-4xl capitalize font-bold">
+          Our Services
+        </h1>
         <p className="text-zinc-50 text-left leading-8 mt-4 line-clamp-3">
           <b>Connecting Families & Friends, Anytime,</b> Anywhere Wazzap is a
           lightweight, user-friendly messaging app designed to keep your
@@ -16,30 +18,29 @@ export default function services() {
           distance. Wazzap ensures quick, reliable, and effortless communication
           in real time.
         </p>
-        <div className="services_info grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-start gap-6 my-8">
+        <div className="services_info grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 items-start gap-6 my-8">
           {SERVICESHELPERS.map((services, index) => (
-            <div key={index} className="bg-white p-3 rounded-xl">
-              <div className="w-[100%]">
-                <Image
-                  src={services.serviceImg}
-                  alt=""
-                  priority
-                  width={1200}
-                  height={300}
-                  className="w-full rounded-xl h-[300px] object-cover"
+            <div
+              key={index}
+              className="bg-white p-5 shadow-2xl border rounded-xl aspect-3/2"
+            >
+              <div className="text-3xl">
+                <services.serviceImg
+                  style={{ color: services.iconColor }}
+                  size={36}
                 />
               </div>
-              <h1 className="mt-6 text-[16px] text-center text-black capitalize font-bold">
+              <h1 className="mt-6 text-[16px] text-black capitalize font-bold">
                 {services.serviceLabel}
               </h1>
+              <p className="text-zinc-600 text-sm leading-6 sm:leading-7">
+                {services.serviceDescriptionL}
+              </p>
             </div>
           ))}
         </div>
         <div className="services_btn flex items-center justify-center pt-6">
-          <Button
-            size={"lg"}
-            className="bg-white hover:bg-white text-black px-12 py-4 cursor-pointer"
-          >
+          <Button className="ml-5 font-medium capitalize text-gray-800 bg-[#f7f7f7] py-6 px-16 rounded-md cursor-pointer duration-300">
             Get started
           </Button>
         </div>
