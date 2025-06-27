@@ -14,7 +14,6 @@ import { useMutation } from "@tanstack/react-query";
 import * as z from "zod";
 import { useStore } from "@/Zustand/store/useStore";
 import { useRouter } from "next/navigation";
-import { ThumbsUp } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 
 export function SignupForm({

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { type AuthSlice, createAuthSlice } from "@/zustand/slice/auth-slice";
+import { type AuthSlice, createAuthSlice } from "@/Zustand/slice/auth-slice";
 
 export interface StoreSlice extends AuthSlice {}
 
