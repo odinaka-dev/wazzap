@@ -99,7 +99,7 @@ export function LoginForm({
 
         <Button
           type="submit"
-          className="w-full"
+          className="w-full bg-[#634aff] hover:opacity-50 duration-300 cursor-pointer"
           // disabled={errors.email || errors.password}
         >
           Login
