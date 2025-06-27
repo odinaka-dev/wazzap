@@ -1,9 +1,9 @@
+"use client";
+
 import React from "react";
 
 import { SignupForm } from "@/components/signup-form";
 import { PiChatTeardropTextFill } from "react-icons/pi";
-import { register as registerAPI } from "@/services/auth.service";
-import { RegisterUsersSchema } from "@/lib/zod";
 
 export default function signup() {
   return (

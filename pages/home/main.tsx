@@ -26,6 +26,10 @@ const FrequentlyAskedQuestions = dynamic(
   }
 );
 
+const SubFooterComponent = dynamic(() => import("./subFooter"), {
+  loading: () => <section style={{ height: 500 }}>loading...</section>,
+});
+
 const FooterComponent = dynamic(() => import("./footer"), {
   loading: () => <section style={{ height: 500 }}>loading...</section>,
 });
@@ -61,6 +65,7 @@ export default function MainPages() {
       <Services />
       <PricingComponent />
       <FrequentlyAskedQuestions />
+      <SubFooterComponent />
       <FooterComponent />
     </div>
   );

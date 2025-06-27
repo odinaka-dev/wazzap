@@ -8,13 +8,13 @@ import type {
   UserDashboardData,
 } from "@/types/auth";
 
-export const register = async (data: RegisterUsers): Promise<Response<any>> => {
+export const Register = async (data: RegisterUsers): Promise<Response<any>> => {
   let url = "/register";
   const response = await axiosInstance.post(url, data);
   return response.data as Response<any>;
 };
 
-export const login = async (
+export const Login = async (
   data: UserLoginData
 ): Promise<Response<{ token: string }>> => {
   let url = "/login";

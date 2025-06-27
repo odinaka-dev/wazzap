@@ -53,12 +53,12 @@ export default function footer() {
               </li>
               <li>
                 <a href="#" className="hover:text-white">
-                  Blog
+                  Services
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-white">
-                  Careers
+                  Plans
                 </a>
               </li>
               <li>

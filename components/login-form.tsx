@@ -1,60 +1,121 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { Login as LoginAPI } from "@/services/auth.service";
+import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { useStore } from "@/Zustand/store/useStore";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginUsersSchema } from "@/lib/zod";
+import * as z from "zod";
+import { useMutation } from "@tanstack/react-query";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const router = useRouter();
+  const { setIsLoggedIn, setUsers } = useStore();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof LoginUsersSchema>>({
+    resolver: zodResolver(LoginUsersSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const { mutateAsync: Login } = useMutation({
+    mutationKey: ["login"],
+    mutationFn: LoginAPI,
+  });
+
+  async function onSubmit(values: z.infer<typeof LoginUsersSchema>) {
+    try {
+      const response = await Login(values);
+
+      if (response.success) {
+        setUsers({
+          email: values.email,
+          password: values.password,
+        });
+        setIsLoggedIn(true);
+        setTimeout(() => {
+          router.push("/chats");
+        }, 5000);
+        toast.success("Login successful!");
+      } else {
+        toast.error(response.message || "Login failed");
+      }
+    } catch (err) {
+      toast.error("Something went wrong during login.");
+      console.error(err);
+    }
+  }
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
-      <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold text-[#634aff]">Login to WAZAPP</h1>
-        <p className="text-muted-foreground text-sm text-balance">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn("space-y-6", className)}
+      {...props}
+    >
+      <div className="space-y-2 text-center">
+        <h1 className="text-2xl font-bold">Login to WAZAPP</h1>
+        <p className="text-sm text-muted-foreground">
           Enter your email below to login to your account
         </p>
       </div>
-      <div className="grid gap-6">
-        <div className="grid gap-3">
+
+      <div className="space-y-4">
+        <div>
           <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="wazzap@gmail.com"
-            required
-          />
+          <Input id="email" {...register("email")} type="email" />
+          {errors.email && (
+            <p className="text-sm text-red-600">{errors.email.message}</p>
+          )}
         </div>
-        <div className="grid gap-3">
-          <div className="flex items-center">
-            <Label htmlFor="password">Password</Label>
-            <a
-              href="#"
-              className="ml-auto text-sm underline-offset-4 hover:underline"
-            >
+
+        <div>
+          <Label htmlFor="password">Password</Label>
+          <Input id="password" {...register("password")} type="password" />
+          {errors.password && (
+            <p className="text-sm text-red-600">{errors.password.message}</p>
+          )}
+          <div className="text-right mt-1">
+            <Link href="/forgot-password" className="text-xs underline">
               Forgot your password?
-            </a>
+            </Link>
           </div>
-          <Input id="password" type="password" required />
         </div>
-        <Link href="/chats">
-          <Button type="submit" className="w-full  bg-[#634aff]">
-            Login
-          </Button>
-        </Link>
-        <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-          <span className="bg-background text-muted-foreground relative z-10 px-2">
-            Or
-          </span>
-        </div>
+
+        <Button
+          type="submit"
+          className="w-full"
+          // disabled={errors.email || errors.password}
+        >
+          Login
+        </Button>
       </div>
-      <div className="text-center text-sm">
-        Don&apos;t have an account?{" "}
-        <a href="#" className="underline underline-offset-4">
-          Sign up
-        </a>
+
+      <div className="text-center">
+        <p className="text-sm text-muted-foreground">
+          Don't have an account?{" "}
+          <Link href="/signup" className="underline">
+            Sign up
+          </Link>
+        </p>
       </div>
+
+      <ToastContainer />
     </form>
   );
 }

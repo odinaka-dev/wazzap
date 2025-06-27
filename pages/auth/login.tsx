@@ -2,8 +2,6 @@
 
 import { LoginForm } from "@/components/login-form";
 import { PiChatTeardropTextFill } from "react-icons/pi";
-import Image from "next/image";
-import { Images } from "@/constants/image";
 
 export default function LoginPage() {
   return (
