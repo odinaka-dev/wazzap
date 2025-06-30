@@ -43,18 +43,20 @@ export function LoginForm({
     try {
       const response = await Login(values);
 
-      if (response.success) {
+      console.log(response.data);
+
+      if (response.success === true && response.data) {
+        localStorage.setItem("token:", response.data.token);
         setUsers({
           email: values.email,
           password: values.password,
         });
-        setIsLoggedIn(true);
         setTimeout(() => {
           router.push("/chats");
-        }, 5000);
+        }, 3000);
         toast.success("Login successful!");
       } else {
-        toast.error(response.message || "Login failed");
+        toast.error("Login failed");
       }
     } catch (err) {
       toast.error("Something went wrong during login.");
