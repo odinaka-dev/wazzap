@@ -22,6 +22,7 @@ export function LoginForm({
   const router = useRouter();
   const { setIsLoggedIn, setUsers } = useStore();
 
+  // zod resolver for form validation
   const {
     register,
     handleSubmit,
@@ -34,17 +35,21 @@ export function LoginForm({
     },
   });
 
+  // mutation for login API call
+  // using react-query for better state management and caching
   const { mutateAsync: Login } = useMutation({
     mutationKey: ["login"],
     mutationFn: LoginAPI,
   });
 
+  // function to handle form submission
   async function onSubmit(values: z.infer<typeof LoginUsersSchema>) {
     try {
       const response = await Login(values);
 
       console.log(response.data);
 
+      // conditional logic based on API response
       if (response.success === true && response.data) {
         localStorage.setItem("token:", response.data.token);
         setUsers({
