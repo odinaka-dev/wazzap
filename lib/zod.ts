@@ -15,12 +15,24 @@ export const RegisterUsersSchema = z.object({
     .min(6, { message: "password must be at least 6 characters long" }),
 });
 
+// export const LoginUsersSchema = z.object({
+//   email: z.string().trim().email({ message: "email is required" }),
+//   password: z
+//     .string()
+//     .trim()
+//     .min(6, {
+//       message: "password must be strong and be atleast 6 characters long",
+//     }),
+// });
+
 export const LoginUsersSchema = z.object({
-  email: z.string().trim().email({ message: "email is required" }),
+  email: z
+    .string()
+    .includes("@", { message: "email must contain an '@' symbol" })
+    .trim()
+    .email(),
   password: z
     .string()
     .trim()
-    .min(6, {
-      message: "password must be strong and be atleast 6 characters long",
-    }),
+    .min(6, { message: "password must be at least 6 characters long" }),
 });
